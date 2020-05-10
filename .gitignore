@@ -1,0 +1,6 @@
+temp/
+.terraform/
+**/.terraform/
+**/*.tar.gz
+**/*.tar
+**/*.zip
