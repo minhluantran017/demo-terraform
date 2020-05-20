@@ -1,7 +1,3 @@
-provider "libvirt" {
-  uri = "qemu+ssh://${var.kvm_user}@${var.kvm_ip}/system?socket=/var/run/libvirt/libvirt-sock"
-}
-
 #################################
 #  PREPARE THE DEPLOYMENT
 #################################
@@ -36,7 +32,6 @@ resource "libvirt_cloudinit_disk" "commoninit" {
 # CREATE THE MACHINES AND VOLUMES
 #################################
 
-## Jenkins master
 resource "libvirt_volume" "demo_terraform" {
   count         = lookup(var.demo_terraform_vm, "count")
   name          = "demo_terraform_${count.index}"
@@ -91,12 +86,4 @@ resource "libvirt_domain" "demo_terraform" {
 </xsl:stylesheet>
 EOF
   }
-}
-
-
-terraform {
-  required_version = ">= 0.12"
-}
-output "demo_terraform_ip" {
-  value = libvirt_domain.demo_terraform.*.network_interface.0.addresses
 }
