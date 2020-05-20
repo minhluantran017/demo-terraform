@@ -25,17 +25,17 @@ cd demo-terraform
 Code structure:
 ```shell
 .
-|____<provider>             // Each provider is a directory
-|    |____provider.tf       // Contains general configurations for this provider
-|    |____<...>.tf          // Contains TF plans for components
-|    |____<...>.tfvars      // Contains variables for plans 
-|____scripts                // Contains shell/python/powershell scripts
+|____<provider>             # Each provider is a directory
+|    |____provider.tf       # Contains general configurations for this provider
+|    |____<...>.tf          # Contains TF plans for components
+|    |____<...>.tfvars      # Contains variables for plans 
+|____scripts                # Contains shell/python/powershell scripts
 |    |____*.sh
 |    |____*.py
-|____files                  // Contains other files 
+|____files                  # Contains other files 
 |    |____*.txt
 |    |____*.cfg
-|____LICENSE               // Contains licenses
+|____LICENSE                # Contains licenses
 |____README.md
 ```
 

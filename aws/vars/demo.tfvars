@@ -10,8 +10,8 @@ variable "environment" {
         The name of enviroment for project.
         Default is name of tfvars file to apply.
         Typical values are [demo, dev, staging, prod].
-    EOT
-    default     = "prod"
+EOT
+    default     = "demo"
 }
 
 variable "uid" {
@@ -20,29 +20,30 @@ variable "uid" {
         Unique identifier for the build.
         Default will be timestamp in format:
         DD-MMM-YYYY-hh-mm-ss
-    EOT
+EOT
     default     = formatdate("DD-MMM-YYYY-hh-mm-ss", timestamp)
 }
 
 variable "aws_region" {
     type        = string
     description = "AWS region"
-    default     = "us-west-1"
+    default     = "us-east-1"
 }
 
 variable "vpc" {
     type        = map
     description = "CIDR for VPC and subnets"
     default     = {
-        cidr        = "10.79.0.0/16"
-        public_cidr = "10.79.10.0/24"
-        private_cidr= "10.79.20.0/24"
+        cidr        = "10.69.0.0/16"
+        public_cidr = "10.69.10.0/24"
+        private_cidr= "10.69.20.0/24"
     }
 }
+
 variable "enable_nat_gw" {
     type        = string
     description = "Enable NAT gateway deployment. Extra cost will be charged."
-    default     = "true"
+    default     = "false"
 }
 
 variable "dev_user" {
@@ -50,8 +51,7 @@ variable "dev_user" {
     description = "List of developers"
     default     = [
         "developer1",
-        "developer2",
-        "developer3"
+        "developer2"
     ]
 }
 
@@ -68,8 +68,7 @@ variable "manager_user" {
     type        = list
     description = "List of managers"
     default     = [
-        "manager1",
-        "prime1"
+        "manager1"
     ]
 }
 
@@ -77,9 +76,9 @@ variable "app-vm" {
     type        = map
     description = "Configurations for Application VMs"
     default     = {
-        count   = 2,
-        type    = "t2.xlarge",
-        ebs_size= 100
+        count   = 1,
+        type    = "t2.micro",
+        ebs_size= 20
     }
 }
 
@@ -87,9 +86,9 @@ variable "db-vm" {
     type        = map
     description = "Configurations for Database VMs"
     default     = {
-        count   = 3,
-        type    = "t2.medium",
-        ebs_size= 200
+        count   = 1,
+        type    = "t2.micro",
+        ebs_size= 20
     }
 }
 
@@ -97,8 +96,8 @@ variable "lb-vm" {
     type        = map
     description = "Configurations for Load Balancing VMs"
     default     = {
-        count   = 1,
-        type    = "t2.large",
-        ebs_size= 50
+        count   = 0,
+        type    = "t2.micro",
+        ebs_size= 20
     }
 }
