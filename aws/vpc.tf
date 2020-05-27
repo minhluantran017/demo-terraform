@@ -7,7 +7,7 @@ resource "aws_vpc" "vpc" {
 
 //# Create public subnet
 resource "aws_subnet" "public-subnet" {
-    vpc_id     = "${aws_vpc.vpc.id}"
+    vpc_id     = aws_vpc.vpc.id
     cidr_block = lookup(var.vpc, "public_cidr")
     tags = merge(local.common_tags,
         map("Name", "${var.project}-public-subnet"))
@@ -30,15 +30,15 @@ resource "aws_internet_gateway" "igw" {
 
 //# Create Elastic IP - Conditional
 resource "aws_eip" "nat" {
-    count   = "${var.enable_nat_gw == "true" ? 1 : 0}"
+    count   = var.enable_nat_gw ? 1 : 0
     vpc     = true
 }
 
 //# Create NAT gateway - conditional
 resource "aws_nat_gateway" "nat-gw" {
-    count           = "${var.enable_nat_gw == "true" ? 1 : 0}"
+    count   = var.enable_nat_gw ? 1 : 0
     //# Attach EIP to NAT GW
-    allocation_id   = aws_eip.nat.id
+    allocation_id   = aws_eip.nat[count.index].id
     subnet_id       = aws_subnet.public-subnet.id
 
     tags = merge(local.common_tags,
@@ -58,12 +58,12 @@ resource "aws_route_table" "public-route-table" {
 //# Associate to subnet
 resource "aws_route_table_association" "a" {
     subnet_id      = aws_subnet.public-subnet.id
-    route_table_id = aws_route_table.pulic-route-table.id
+    route_table_id = aws_route_table.public-route-table.id
 }
 
 //# Create security groups
 resource "aws_security_group" "public-sg" {
-    Name        = "${var.project}-public-sg"
+    name        = "${var.project}-public-sg"
     vpc_id      = aws_vpc.vpc.id
     ingress {
         from_port   = 22
@@ -106,7 +106,7 @@ resource "aws_security_group" "public-sg" {
 }
 
 resource "aws_security_group" "private-sg" {
-    Name        = "${var.project}-private-sg"
+    name        = "${var.project}-private-sg"
     vpc_id      = aws_vpc.vpc.id
     ingress {
         from_port   = 0
