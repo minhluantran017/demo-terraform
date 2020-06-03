@@ -13,15 +13,15 @@ vsphere_network         = "Engineering Network"
 
 # Option for creating VM
 ## Clone from template
-clone_template          = "${CLONE_TEMPLATE}"
+clone_template          = ${CLONE_TEMPLATE}
 vsphere_template        = "${TEMPLATE_NAME}"
 
 # From local OVF file
-local_ovf               = "${LOCAL_OVF}"
+local_ovf               = ${LOCAL_OVF}
 local_ovf_path          = "${LOCAL_OVF_PATH}"
 
 # From remote OVF file
-remote_ovf              = "${REMOTE_OVF}"
+remote_ovf              = ${REMOTE_OVF}
 remote_ovf_url          = "${REMOTE_OVF_URL}"
 
 # Configuration for VM

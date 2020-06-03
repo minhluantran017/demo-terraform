@@ -51,22 +51,15 @@ cd vsphere
 ```
 
 Replace value in `templates/terraform.tfvars.tpl` with proper values.
+
 ```sh
 envsubst <templates/terraform.tfvars.tpl >terraform.tfvars
 ```
 
-Initialize the workspace:
+Then proceed with Terraform commands:
 ```sh
 terraform init
-```
-
-See the plan before applying:
-```sh
 terraform plan
-```
-
-Apply the deployment plan:
-```sh
 terraform apply -auto-approve
 ```
 
