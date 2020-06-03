@@ -4,3 +4,4 @@ temp/
 **/*.tar.gz
 **/*.tar
 **/*.zip
+**/terraform.tfvars
