@@ -27,9 +27,9 @@ resource "aws_iam_user" "manager" {
     name = element(var.manager_user, count.index)
 }
 
-# Create Jenkins Slave role
-resource "aws_iam_role" "jenkins-slave-role" {
-    name = "jenkins-slave-role"
+# Create EC2 role
+resource "aws_iam_role" "instance-role" {
+    name = "instance-role"
     assume_role_policy = <<EOF
 {
     "Version": "2012-10-17",
@@ -47,10 +47,10 @@ resource "aws_iam_role" "jenkins-slave-role" {
 EOF
 }
 
-# Create Jenkins Slave instance profile
-resource "aws_iam_instance_profile" "jenkins-slave-profile" {
-    name = "jenkins-slave-profile"
-    role = aws_iam_role.jenkins-slave-role.name
+# Create EC2 instance profile
+resource "aws_iam_instance_profile" "instance-profile" {
+    name = "instance-profile"
+    role = aws_iam_role.instance-role.name
 }
 
 # Create policy for Developers
@@ -123,10 +123,10 @@ resource "aws_iam_group_policy" "managers-group-policy" {
 EOF
 }
 
-# Create policy for Jenkins Slave role
-resource "aws_iam_role_policy" "jenkins-slave-role-policy" {
-    name = "jenkins-slave-role-policy"
-    role    = aws_iam_role.jenkins-slave-role.name
+# Create policy for EC2 role
+resource "aws_iam_role_policy" "instance-role-policy" {
+    name = "instance-role-policy"
+    role    = aws_iam_role.instance-role.name
     policy = <<EOF
 {
     "Version": "2012-10-17",

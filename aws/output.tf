@@ -1,8 +1,3 @@
-output "TF_BUILD_UID" {
-    description = "The Unique ID for this Terraform deployment"
-    value       = var.uid
-}
-
 output "AWS_PUBLIC_SUBNET_ID" {
     description = "The AWS public subnet ID"
     value       = aws_subnet.public-subnet.id

@@ -42,17 +42,6 @@ Code structure:
 ### Create a simple AWS environment
 
 ```shell
-# Define the build number for your build:
-export BUILD_NUMBER=$(date)
-
-# Define the AWS region for the infrastructure:
-export AWS_REGION=us-east-1
-
-# Define the Amazon S3 bucket for storing TF states. It must be in same region above:
-export S3_BUCKET=devops-minhluantran017-com
-
-# Define your environment description: demo, dev, staging, prod
-export ENVIRON=demo
 
 # If you want to enable NAT gateway deployment (default to 'false'):
 export ENABLE_NAT=true

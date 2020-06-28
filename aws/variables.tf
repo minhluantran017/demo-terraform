@@ -1,41 +1,3 @@
-variable "project" {
-    type        = string
-    description = "Project name"
-    default     = "demo-terraform"
-}
-
-variable "environment" {
-    type        = string
-    description = <<EOT
-        The name of enviroment for project.
-        Default is name of tfvars file to apply.
-        Typical values are [demo, dev, staging, prod].
-EOT
-    default     = "demo"
-}
-
-variable "uid" {
-    type        = string
-    description = <<EOT
-        Unique identifier for the build.
-        The prefer ID is timestamp format:
-        YYYY-MMM-DD-hh-mm-ss
-EOT
-    default     = 123456
-}
-
-variable "aws_region" {
-    type        = string
-    description = "AWS region"
-    default     = "us-east-1"
-}
-
-variable "s3_bucket" {
-    type        = string
-    description = "The bucket name to store Terraform state."
-    default     = "demo-minhluantran017-com"
-}
-
 variable "vpc" {
     type        = map
     description = "CIDR for VPC and subnets"
@@ -78,8 +40,8 @@ variable "manager_user" {
     ]
 }
 
-variable "app-vm" {
-    type        = map
+variable "app_vm" {
+    type        = object{count = number, type = string, ebs_size = number}
     description = "Configurations for Application VMs"
     default     = {
         count   = 1,
@@ -88,8 +50,8 @@ variable "app-vm" {
     }
 }
 
-variable "db-vm" {
-    type        = map
+variable "db_vm" {
+    type        = object{count = number, type = string, ebs_size = number}
     description = "Configurations for Database VMs"
     default     = {
         count   = 1,
@@ -98,8 +60,8 @@ variable "db-vm" {
     }
 }
 
-variable "lb-vm" {
-    type        = map
+variable "lb_vm" {
+    type        = object{count = number, type = string, ebs_size = number}
     description = "Configurations for Load Balancing VMs"
     default     = {
         count   = 0,

@@ -1,5 +1,5 @@
 provider "aws" {
-    region = var.aws_region
+    region = "ap-southeast-1"
 }
 
 data "aws_availability_zones" "available" {}
@@ -7,9 +7,9 @@ data "aws_availability_zones" "available" {}
 terraform {
     # Configure S3 backend for AWS to store Terraform state.
     backend "s3" {
-        bucket = "${var.s3_bucket}"
-        key    = "${var.project}/${var.environment}/terraform-state/${var.uid}"
-        region = var.aws_region
+        bucket = "demo-minhluantran017-com"
+        key    = "terraform-states/demo-terraform/terraform.tfstate"
+        region = "ap-southeast-1"
     }
     required_version = ">= 0.12"
 }
@@ -17,10 +17,10 @@ terraform {
 locals {
     # Common tags to be assigned to all resources
     common_tags = {
-        project     = var.project
-        environment = var.environment
+        project     = "demo-terraform"
+        environment = "demo"
     }
-    cluster_name = "training-eks-${random_string.suffix.result}"
+    base_name = "demo-terraform-${random_string.suffix.result}"
 }
 
 resource "random_string" "suffix" {

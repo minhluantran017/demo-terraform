@@ -2,7 +2,7 @@
 resource "aws_vpc" "vpc" {
     cidr_block  = lookup(var.vpc, "cidr")
     tags = merge(local.common_tags,
-        map("Name", "${var.project}-vpc"))
+        map("Name", "${locals.base_name}-vpc"))
 }
 
 //# Create public subnet
@@ -10,7 +10,7 @@ resource "aws_subnet" "public-subnet" {
     vpc_id     = aws_vpc.vpc.id
     cidr_block = lookup(var.vpc, "public_cidr")
     tags = merge(local.common_tags,
-        map("Name", "${var.project}-public-subnet"))
+        map("Name", "${locals.base_name}-public-subnet"))
 }
 
 //# Create private subnet
@@ -18,14 +18,14 @@ resource "aws_subnet" "private-subnet" {
     vpc_id     = aws_vpc.vpc.id
     cidr_block = lookup(var.vpc, "private_cidr")
     tags = merge(local.common_tags,
-        map("Name", "${var.project}-private-subnet"))
+        map("Name", "${locals.base_name}-private-subnet"))
 }
 
 //# Create internet gateway
 resource "aws_internet_gateway" "igw" {
     vpc_id    = aws_vpc.vpc.id
     tags = merge(local.common_tags,
-        map("Name", "${var.project}-igw"))
+        map("Name", "${locals.base_name}-igw"))
 }
 
 //# Create Elastic IP - Conditional
@@ -42,7 +42,7 @@ resource "aws_nat_gateway" "nat-gw" {
     subnet_id       = aws_subnet.public-subnet.id
 
     tags = merge(local.common_tags,
-        map("Name", "${var.project}-nat-gw"))
+        map("Name", "${locals.base_name}-nat-gw"))
 }
 
 //# Create route table
@@ -53,7 +53,7 @@ resource "aws_route_table" "public-route-table" {
         gateway_id = aws_internet_gateway.igw.id
     }
     tags = merge(local.common_tags,
-        map("Name", "${var.project}-route-table"))
+        map("Name", "${locals.base_name}-route-table"))
 }
 //# Associate to subnet
 resource "aws_route_table_association" "a" {
@@ -63,7 +63,7 @@ resource "aws_route_table_association" "a" {
 
 //# Create security groups
 resource "aws_security_group" "public-sg" {
-    name        = "${var.project}-public-sg"
+    name        = "${locals.base_name}-public-sg"
     vpc_id      = aws_vpc.vpc.id
     ingress {
         from_port   = 22
@@ -102,11 +102,11 @@ resource "aws_security_group" "public-sg" {
     }
 
     tags = merge(local.common_tags,
-        map("Name", "${var.project}-public-sg"))
+        map("Name", "${locals.base_name}-public-sg"))
 }
 
 resource "aws_security_group" "private-sg" {
-    name        = "${var.project}-private-sg"
+    name        = "${locals.base_name}-private-sg"
     vpc_id      = aws_vpc.vpc.id
     ingress {
         from_port   = 0
@@ -130,6 +130,6 @@ resource "aws_security_group" "private-sg" {
         cidr_blocks = ["0.0.0.0/0"]
     }
     tags = merge(local.common_tags,
-        map("Name", "${var.project}-private-sg"))
+        map("Name", "${locals.base_name}-private-sg"))
 }
 
