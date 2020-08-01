@@ -1,13 +1,11 @@
 variable "kvm_ip" {
     type        = string
     description = "KVM host IP address"
-    default     = "10.250.200.220"
 }
 
 variable "kvm_user" {
     type        = string
     description = "KVM host username"
-    default     = "root"
 }
 
 variable "base_image_name" {
