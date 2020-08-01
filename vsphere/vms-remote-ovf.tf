@@ -27,7 +27,3 @@ resource "vsphere_virtual_machine" "vmFromRemoteOvf" {
     ]
   }
 }
-
-output "VM_REMOTE_OVF_IP_ADDRESSES" {
-  value = vsphere_virtual_machine.vmFromRemoteOvf.*.default_ip_address
-}

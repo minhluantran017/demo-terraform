@@ -46,7 +46,3 @@ resource "vsphere_virtual_machine" "vmFromTemplate" {
     ]
   }
 }
-
-output "VM_FROM_TEMPLATE_IP_ADDRESSES" {
-  value = vsphere_virtual_machine.vmFromTemplate.*.default_ip_address
-}

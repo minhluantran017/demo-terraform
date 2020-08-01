@@ -51,6 +51,7 @@ variable "clone_template" {
 variable "vsphere_template" {
     type = string
     description = "The VM template for cloning."
+    default = ""
 }
 
 # From local OVF file
@@ -63,6 +64,7 @@ variable "local_ovf" {
 variable "local_ovf_path" {
     type = string
     description = "The path to local OVF file."
+    default = ""
 }
 
 # From remote OVF file
@@ -75,6 +77,7 @@ variable "remote_ovf" {
 variable "remote_ovf_url" {
     type = string
     description = "The URL to remote OVF file."
+    default = ""
 }
 
 # Configuration for VM
