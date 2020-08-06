@@ -1,5 +1,5 @@
 provider "libvirt" {
-  uri = "qemu+ssh://${var.kvm_user}@${var.kvm_ip}/system?socket=/var/run/libvirt/libvirt-sock"
+  uri = "qemu+ssh://localhost/system?socket=/var/run/libvirt/libvirt-sock"
 }
 
 terraform {
