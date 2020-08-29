@@ -66,7 +66,7 @@ resource "libvirt_domain" "virtual_machine" {
   network_interface {
     hostname    = "${var.vm_name}_${count.index}"
     macvtap     = "enp4s0f0"
-    addresses   = [element(var.addresses, count.index)]
+    addresses   = [element(var.ip_addresses, count.index)]
     wait_for_lease = true
   }
   console {
