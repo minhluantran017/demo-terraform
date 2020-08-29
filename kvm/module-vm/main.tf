@@ -30,7 +30,7 @@ data "template_file" "network_config" {
   count = var.vm_count
   template      = file("${path.module}/network_config.cfg")
   vars = {
-    IPADDR      = element(var.ip_addresses, count.index)
+    IP_ADDRESS  = element(var.ip_addresses, count.index)
     GW_ADDRESS  = var.gw_address
     DNS_ADDRESS = var.dns_address
   }
