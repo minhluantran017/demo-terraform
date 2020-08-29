@@ -1,6 +1,6 @@
 # Libvirt pool to contain VMs and disks
 resource "libvirt_pool" "pool" {
-  count         var.create_pool ? 1 : 0
+  count         = var.create_pool ? 1 : 0
   name          = var.libvirt_pool
   type          = "dir"
   path          = "/tmp/${var.libvirt_pool}"
