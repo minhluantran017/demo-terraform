@@ -7,7 +7,7 @@ resource "libvirt_pool" "pool" {
 }
 
 locals {
-  pool          = var.create_pool ? libvirt_pool.pool.name : var.libvirt_pool
+  pool          = var.create_pool ? libvirt_pool.pool[0].name : var.libvirt_pool
 }
 
 # Base image for the VMs
