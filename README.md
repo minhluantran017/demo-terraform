@@ -65,7 +65,38 @@ terraform apply -auto-approve
 
 ### Create a simple KVM environment
 
-TODO
+Go to `kvm` folder:
+```sh
+cd kvm
+```
+Simple CentOS VM creation can be found here.
+Just proceed with Terraform commands:
+```sh
+terraform init
+terraform plan
+terraform apply -auto-approve
+```
+
+For using module, please use example format as follow:
+```hcl
+module "ubuntu-vm" {
+    source          = "git::https://github.com/minhluantran017/demo-terraform.git//kvm/module-vm?ref=v0.1.4"
+    base_image_url  = "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"
+    libvirt_pool    = "devops"
+    create_pool     = true
+    vm_name         = "ubuntu-vm"
+    vm_count        = 1
+    vm_vcpu         = 4
+    vm_memory       = 8096
+    vm_disk         = 100000000000
+    ip_addresses    = [
+        "10.250.200.191"
+    ]
+    gw_address      = "10.250.200.1"
+    dns_address     = "10.250.200.2"
+    ssh_public_key  = "ssh-rsa AAAA..."
+}
+```
 
 ### Create aa simple OpenStack environment
 
@@ -80,7 +111,7 @@ For example: `dev_aws`.
 
 ## 4. Licenses
 
-Packer is under MPL2 licence. See [LICENSE](LICENSE)
+Terraform is under MPL2 licence. See [LICENSE](LICENSE)
 
 ## 5. TODO
 
